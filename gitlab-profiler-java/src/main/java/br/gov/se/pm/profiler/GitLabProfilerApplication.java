@@ -25,4 +25,19 @@ public class GitLabProfilerApplication {
             }
         };
     }
+
+    @Bean
+    public org.springframework.ai.ollama.OllamaChatModel customOllamaChatModel() {
+        org.springframework.http.client.SimpleClientHttpRequestFactory requestFactory = new org.springframework.http.client.SimpleClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(30000); // 30s
+        requestFactory.setReadTimeout(180000); // 3m
+
+        org.springframework.web.client.RestClient.Builder restClientBuilder = org.springframework.web.client.RestClient
+                .builder().requestFactory(requestFactory);
+        org.springframework.ai.ollama.api.OllamaApi ollamaApi = new org.springframework.ai.ollama.api.OllamaApi(
+                "http://localhost:11434", restClientBuilder);
+
+        return new org.springframework.ai.ollama.OllamaChatModel(ollamaApi,
+                org.springframework.ai.ollama.api.OllamaOptions.create().withModel("llama3"));
+    }
 }

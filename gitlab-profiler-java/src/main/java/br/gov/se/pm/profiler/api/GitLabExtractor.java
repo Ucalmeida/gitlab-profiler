@@ -12,7 +12,7 @@ public class GitLabExtractor {
     public String extractDeveloperData(String gitlabUrl, String token, Integer userId) throws GitLabApiException {
         // Exemplo de extração básica para alimentar a IA
         try (GitLabApi gitLabApi = new GitLabApi(gitlabUrl, token)) {
-            List<Event> events = gitLabApi.getEventsApi().getUserEvents(userId, null, null, null, null,
+            List<Event> events = gitLabApi.getEventsApi().getUserEvents(Long.valueOf(userId), null, null, null, null,
                     org.gitlab4j.api.Constants.SortOrder.DESC);
 
             // Concatena as mensagens para o prompt
