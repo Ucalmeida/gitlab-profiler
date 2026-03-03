@@ -1,18 +1,26 @@
 services:
   ollama:
-    image: ollama/ollama:latest
+    # image: ollama/ollama:latest
+    image: ollama/ollama:rocm
     container_name: ollama_dev
     ports:
       - "11434:11434"
     volumes:
       - ./data/ollama:/root/.ollama  # Persistência dos modelos na sua pasta de dados
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    # A configuração comentada é para a placa de vídeo nvidia GTX 1660Ti
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    environment:
+      # Essencial para RX 550 (Arquitetura Polaris/GFX803)
+      - HSA_OVERRIDE_GFX_VERSION=8.0.3
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
     restart: always
 
   # Futuro: Seu App Java pode ser adicionado aqui para rodar na mesma rede

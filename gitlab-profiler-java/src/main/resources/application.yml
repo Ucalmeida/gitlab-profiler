@@ -4,9 +4,13 @@ spring:
   ai:
     ollama:
       base-url: http://localhost:11434
+      init:
+        timeout: 60s
+        max-retries: 3
       chat:
         options:
           model: llama3 # ou mistral
+          num-predict: 4096
 
   graphql:
     graphiql:
@@ -17,3 +21,4 @@ langchain4j:
     chat-model:
       base-url: http://localhost:11434
       model-name: llama3
+      timeout: 300s

@@ -3,7 +3,6 @@ package br.gov.se.pm.profiler.api;
 import org.gitlab4j.api.GitLabApi;
 import org.gitlab4j.api.GitLabApiException;
 import org.gitlab4j.api.models.Event;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
