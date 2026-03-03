@@ -1,0 +1,18 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama_dev
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./data/ollama:/root/.ollama  # Persistência dos modelos na sua pasta de dados
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: always
+
+  # Futuro: Seu App Java pode ser adicionado aqui para rodar na mesma rede
