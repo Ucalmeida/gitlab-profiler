@@ -16,10 +16,10 @@ public class ProfilerGraphqlController {
     }
 
     @QueryMapping
-    public String analyzeProfile(@Argument String gitlabUrl, @Argument String token, @Argument Integer userId)
+    public String analyzeProfile(@Argument String gitlabUrl, @Argument String token, @Argument Long projectId)
             throws Exception {
         GitLabExtractor extractor = new GitLabExtractor();
-        String dadosGitlab = extractor.extractDeveloperData(gitlabUrl, token, userId);
-        return aiProfileService.getProfile(dadosGitlab);
+        String dadosGitlab = extractor.extractProjectCommits(gitlabUrl, token, projectId);
+        return aiProfileService.gerarRelatorio(dadosGitlab);
     }
 }

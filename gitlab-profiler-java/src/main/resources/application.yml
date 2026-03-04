@@ -4,6 +4,8 @@ spring:
   ai:
     ollama:
       base-url: http://localhost:11434
+      init:
+        timeout: 300s # Aumenta o tempo limite de espera (5 minutos)
       chat:
         options:
           model: llama3 # ou mistral
