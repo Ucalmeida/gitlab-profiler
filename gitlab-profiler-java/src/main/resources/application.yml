@@ -8,8 +8,10 @@ spring:
         timeout: 300s # Aumenta o tempo limite de espera (5 minutos)
       chat:
         options:
-          model: llama3 # ou mistral
-          num-predict: 4096
+          model: llama3.1
+          num-predict: 12288
+          temperature: 0.1
+          num-ctx: 16384
 
   graphql:
     graphiql:
@@ -19,5 +21,5 @@ langchain4j:
   ollama:
     chat-model:
       base-url: http://localhost:11434
-      model-name: llama3
+      model-name: llama3.1
       timeout: 300s

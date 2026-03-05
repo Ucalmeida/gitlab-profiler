@@ -38,6 +38,9 @@ public class OllamaConfig {
 
         OllamaApi ollamaApi = new OllamaApi(baseUrl, restClientBuilder);
 
-        return new OllamaChatModel(ollamaApi, OllamaOptions.create().withModel(model));
+        return new OllamaChatModel(ollamaApi, OllamaOptions.create()
+                .withModel(model)
+                .withNumPredict(12288)
+                .withTemperature(0.1f));
     }
 }
